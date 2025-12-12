@@ -32,6 +32,12 @@
     .cell:hover {
         background-color: #f1f1f1;
     }
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
 </style>
 </head>
 <body>
@@ -48,6 +54,7 @@
     <div class="cell" onclick="makeMove(this, 2, 2)"></div>
 </div>
 <p id="result"></p>
+<button onclick="resetGame()">Reset Game</button>
 
 <script>
 let currentPlayer = 'X';
@@ -72,7 +79,6 @@ function makeMove(cell, row, col) {
 }
 
 function checkWin() {
-    // Check rows, columns, and diagonals for three in a row
     for (let i = 0; i < 3; i++) {
         if (board[i][0] === currentPlayer && board[i][1] === currentPlayer && board[i][2] === currentPlayer) return true;
         if (board[0][i] === currentPlayer && board[1][i] === currentPlayer && board[2][i] === currentPlayer) return true;
@@ -81,6 +87,21 @@ function checkWin() {
     if (board[0][2] === currentPlayer && board[1][1] === currentPlayer && board[2][0] === currentPlayer) return true;
     return false;
 }
+
+function resetGame() {
+    board = [
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', '']
+    ];
+    currentPlayer = 'X';
+    gameActive = true;
+    document.getElementById('result').textContent = '';
+
+    const cells = document.querySelectorAll('.cell');
+    cells.forEach(cell => cell.textContent = '');
+}
 </script>
 </body>
 </html>
+
